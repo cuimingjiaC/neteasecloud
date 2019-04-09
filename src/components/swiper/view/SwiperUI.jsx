@@ -18,7 +18,7 @@ export default props => (
             props.list.map(value => (
               <img 
                 key={value.id} 
-                src={value.song.album.picUrl} 
+                src={value.coverImgUrl} 
                 alt={value.name}
                 style={{width:'96%',height:'1.4rem',borderRadius:'10px',display:"inline-block"}}
                 onClick={()=>{window.location.href='/play/'+ value.id}}

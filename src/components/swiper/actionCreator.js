@@ -17,8 +17,10 @@ export const setIsLoaded = isLoaded => ({
 
 export const getListAsync = () => {
   return async dispatch => {
-    let result = await http.get('/api/personalized/newsong')
-    dispatch(getListSync(result.result))
+    // let result = await http.get('/api/personalized/newsong')
+    // dispatch(getListSync(result.result))
+    let result = await http.get('/api/top/playlist')
+    dispatch(getListSync(result.playlists))
     dispatch(setIsLoaded(true))
   }
 }

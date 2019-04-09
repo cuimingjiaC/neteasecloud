@@ -5,7 +5,7 @@ import { getListAsync, setIsLoaded } from '../actionCreator'
 import SwiperUI from './SwiperUI'
 
 const mapState = state => ({
-  list: state.list.list,
+  list: state.list.list.slice(0,8),
   isLoaded: state.list.isLoaded
 })
 

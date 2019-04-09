@@ -37,12 +37,13 @@ class FindLeft extends Component {
                     </ul>
                 </BorderedClassify>
                 <RecommendSongs>
-                    <div className="title">推荐歌单 <span className="icon iconfont icon-right"></span></div>
+                    <div className="title" onClick={()=>{window.location.href='/songSheet'}}>推荐歌单  <span className="icon iconfont icon-right"></span></div>
                     <div className="songsList">
                         {
                             this.props.list.map(value => (
                                 <div className="songItem" key={value.id}>
-                                    <SongItem img={value.song.album.picUrl} title={value.song.name} num={(value.song.id+'').slice(0,3)}></SongItem>
+                                    {/* <SongItem img={value.song.album.picUrl} title={value.song.name} num={(value.song.id+'').slice(0,3)}></SongItem> */}
+                                    <SongItem img={value.coverImgUrl} title={value.name} num={value.playCount}></SongItem>
                                 </div>
                             ))
                         }                    
