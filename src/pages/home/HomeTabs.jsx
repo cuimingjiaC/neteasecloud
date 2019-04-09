@@ -3,6 +3,10 @@ import React from 'react'
 import { TabBar } from 'antd-mobile';
 
 import Find from './find/Find'
+import Account from './account/Account'
+import Friends from './friends/Friends'
+import My from './my/My'
+import Video from './video/Video'
 import findImg from 'assets/images/tabbar/01.gif'
 import videoImg from 'assets/images/tabbar/02.gif'
 import myImg from 'assets/images/tabbar/03.gif'
@@ -58,7 +62,7 @@ export default class findTabs extends React.Component {
                   }}
                   data-seed="logId"
                 >
-                  <Find></Find>
+                  <Find ></Find>
                 </TabBar.Item>
 
                 <TabBar.Item
@@ -86,7 +90,7 @@ export default class findTabs extends React.Component {
                   }}
                   data-seed="logId"
                 >
-                  <Find></Find>
+                  <Video></Video>
                 </TabBar.Item>
 
 
@@ -115,7 +119,7 @@ export default class findTabs extends React.Component {
                   }}
                   data-seed="logId"
                 >
-                  <Find></Find>
+                  <My></My>
                 </TabBar.Item>
 
                 <TabBar.Item
@@ -143,7 +147,7 @@ export default class findTabs extends React.Component {
                   }}
                   data-seed="logId"
                 >
-                  <Find></Find>
+                  <Friends></Friends>
                 </TabBar.Item>
 
 
@@ -172,7 +176,7 @@ export default class findTabs extends React.Component {
                   }}
                   data-seed="logId"
                 >
-                  <Find></Find>
+                  <Account></Account>
                 </TabBar.Item>
                 
               </TabBar>

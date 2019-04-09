@@ -2,15 +2,21 @@ import React, { Component } from 'react';
 import './App.css';
 import Home from 'pages/home/Home'
 
+import { Provider } from 'react-redux'
+import store from './store/'
+
+import {
+  BrowserRouter as Router
+} from 'react-router-dom'
 
 class App extends Component {
   render() {
     return (
-      <div>
-          <h1>a</h1>
-        <Home></Home>
-    
-      </div>
+      <Provider store={store}>
+        <Router>
+          <Home></Home>
+        </Router>
+      </Provider>
       
     );
   }
