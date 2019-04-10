@@ -12,9 +12,9 @@ export default class Search extends Component {
         return (
             <FindHeaderContainer>
                 <div>
-                    {this.props.icon1 ? <span className={`iconfont ${this.props.icon1}`} onClick={()=>window.history.back()}></span> : <span className="blank"></span>}
+                    {this.props.icon1 ? <span className={`iconfont ${this.props.icon1}`} onClick={()=>this.firstIconClick(this.props.firstIconType)} ></span> : <span className="blank"></span>}
                     <div className="box">
-                        <span>歌单</span>
+                        <p>{this.props.title}</p>
                     </div>
                     {this.props.icon2 ? <span className={`iconfont ${this.props.icon2}`}></span> : (this.props.cancel? <></>:<span className="blank"></span>)}
                     {this.props.cancel? <div><span className="cancel" onClick={() => this.handleClick('cancel',this.props.type,this.props.returnUrl)}>取消</span></div> : <></>}
@@ -29,4 +29,8 @@ export default class Search extends Component {
         this.props.onClick(url,type,returnUrl)
     }
 
+    firstIconClick(type){
+        this.props.onFirstIconClick(type)
+    }
+   
 }

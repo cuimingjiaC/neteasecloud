@@ -1,4 +1,4 @@
-import Styled from 'styled-components'
+import Styled, { keyframes } from 'styled-components'
 import border from 'components/styled/border'
 
 
@@ -59,7 +59,6 @@ const SongSheetContainer = Styled.div`
           
         }
       }
-    
 
 `
 
@@ -87,6 +86,62 @@ const BorderTitle = border({
 })
 
 
+const slide_in = keyframes`
+  from {
+    bottom:${-document.documentElement.clientHeight}px;
+  }
+  to {
+    bottom:0px;
+  }
+`;
+
+const slide_out = keyframes`
+  from {
+    top:0px;
+  }
+  to {
+    top:${document.documentElement.clientHeight}px;
+  }
+`;
+
+const AllSongList = Styled.div `
+    display: ${ props => props.display } 
+    
+    .showInDown {
+        background: yellow;
+        padding-top:60px
+        width: 100%
+        z-index:999
+        height: ${document.documentElement.clientHeight}px;
+        position: fixed;
+        animation: ${slide_in} 300ms ease-in forwards 
+    }
+
+    .leaveOutDown {
+        background: yellow;
+        padding-top:60px
+        width: 100%
+        z-index:999
+        height: ${document.documentElement.clientHeight}px;
+        position: fixed;
+        animation: ${slide_out} 300ms ease-in forwards 
+    }
+
+    .testbox{
+        overflow:scroll
+        height:500px
+        background-color:green
+       
+        .test{
+            width:100px;
+            height:100px
+            margin:10px
+            background-color:pink
+        }
+    }
+   
+
+`
 
 
 
@@ -94,5 +149,6 @@ export {
     SongSheetContainer,
     BorderTitle,
     BorderedSpan,
-    Span
+    Span,
+    AllSongList
 }

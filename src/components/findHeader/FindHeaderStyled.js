@@ -28,6 +28,14 @@ const FindHeaderContainer = Styled.div `
             flex:1
             display:flex
             justify-content:center
+            p{
+                color:#fff
+                line-height: .5rem
+                text-align:center
+                font-size: .24rem
+                display: block
+                height: 100%
+            }
         }
         
     }

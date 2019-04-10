@@ -29,7 +29,6 @@ class FindPage extends Component {
                 {/* <div className="classify"> */}
                 
                 {/* </div> */}
-
             </FindContainer>
         )
     }
