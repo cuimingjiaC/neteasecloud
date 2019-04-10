@@ -10,12 +10,11 @@ import { getSongListAsync} from 'reducer/songList/actionCreator'
 const mapState = state => ({
     list: state.list.list,
     songList: state.songList.songList.slice(0,3),
-    
   })
 
 const mapDispatch = dispatch => ({
-    loadData() {
-        dispatch(getListAsync())
+    loadData(value) {
+        dispatch(getListAsync(value))
     },
     loadSongList() {
         dispatch(getSongListAsync())
@@ -30,12 +29,10 @@ class SongSheet extends Component {
             showTitleName:'全部歌单'
         };
         this.props.loadSongList()
-        // console.log(1,props)
         this.clickSongList = this.clickSongList.bind(this)
     }
 
     componentDidMount(){
-        // console.log(2,this.props)
         if (this.props.list.length === 0) {
             this.props.loadData()
         }
@@ -46,7 +43,6 @@ class SongSheet extends Component {
         return (
             <SongSheetContainer> 
                 <FindHeader icon1="icon-previous_step" icon2="icon-icon_index_line"></FindHeader>
-               {/* <Search onClick={this.handleClickSearch} ></Search> */}
                <div className="titleImg"></div>
                <div className="classify">
                     <BorderTitle className="title"><span className="titleName">{this.state.showTitleName}</span><span className="iconfont  icon-right"></span></BorderTitle>
@@ -60,10 +56,6 @@ class SongSheet extends Component {
                                             : <li key={index} onClick={()=>{this.clickSongList(value)}}><Span>{value.name}</Span></li>
                                  )})
                             }
-
-                            {/* <li><BorderedSpan>摇滚</BorderedSpan></li>
-                            <li><BorderedSpan>华语</BorderedSpan></li>
-                            <li><Span>民谣</Span></li> */}
                         </ul>
                     </div>
                </div>
@@ -84,10 +76,8 @@ class SongSheet extends Component {
                                 </div>
                             )
                         })
-                           
                     }                    
                 </div>
-
             </SongSheetContainer>
         )
     }
@@ -96,6 +86,7 @@ class SongSheet extends Component {
         this.setState({
             showTitleName: value.name,
         });
+        this.props.loadData(value.name)
     }
 
 }
