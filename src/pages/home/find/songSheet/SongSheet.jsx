@@ -43,42 +43,44 @@ class SongSheet extends Component {
         return (
             <SongSheetContainer> 
                 <FindHeader icon1="icon-previous_step" icon2="icon-icon_index_line"></FindHeader>
-               <div className="titleImg"></div>
-               <div className="classify">
-                    <BorderTitle className="title"><span className="titleName">{this.state.showTitleName}</span><span className="iconfont  icon-right"></span></BorderTitle>
-                    <div className="classItems">
-                        <ul>    
-                            {
-                                this.props.songList.map((value,index) =>  {
-                                    return (
-                                        index !== this.props.songList.length - 1 
-                                            ? <li key={index} onClick={()=>{this.clickSongList(value)}}><BorderedSpan>{value.name}</BorderedSpan></li>
-                                            : <li key={index} onClick={()=>{this.clickSongList(value)}}><Span>{value.name}</Span></li>
-                                 )})
-                            }
-                        </ul>
-                    </div>
-               </div>
-
-               <div className="songsList">
-                    {
-                        // this.props.list.map(value => (
-                        //     <div className="songItem" key={value.id}>
-                        //         <SongItem img={value.song.album.picUrl} title={value.song.name} num={(value.song.id+'').slice(0,3)}></SongItem>
-                        //     </div>
-                        // ))
-                        
-                        this.props.list.map(value => {
-                            return (
-                                <div className="songItem" key={value.id}>
-                                    {/* <SongItem img={value.song.album.picUrl} title={value.song.name} num={(value.song.id+'').slice(0,3)}></SongItem> */}
-                                    <SongItem img={value.coverImgUrl} title={value.name} num={value.playCount} height={170}></SongItem>
-                                </div>
-                            )
-                        })
-                    }                    
+             
+                <div className="titleImg"></div>
+                <div className="classify">
+                        <BorderTitle className="title"><span className="titleName">{this.state.showTitleName}</span><span className="iconfont  icon-right"></span></BorderTitle>
+                        <div className="classItems">
+                            <ul>    
+                                {
+                                    this.props.songList.map((value,index) =>  {
+                                        return (
+                                            index !== this.props.songList.length - 1 
+                                                ? <li key={index} onClick={()=>{this.clickSongList(value)}}><BorderedSpan>{value.name}</BorderedSpan></li>
+                                                : <li key={index} onClick={()=>{this.clickSongList(value)}}><Span>{value.name}</Span></li>
+                                    )})
+                                }
+                            </ul>
+                        </div>
                 </div>
-            </SongSheetContainer>
+
+                <div className="songsList">
+                        {
+                            // this.props.list.map(value => (
+                            //     <div className="songItem" key={value.id}>
+                            //         <SongItem img={value.song.album.picUrl} title={value.song.name} num={(value.song.id+'').slice(0,3)}></SongItem>
+                            //     </div>
+                            // ))
+                            
+                            this.props.list.map(value => {
+                                return (
+                                    <div className="songItem" key={value.id}>
+                                        {/* <SongItem img={value.song.album.picUrl} title={value.song.name} num={(value.song.id+'').slice(0,3)}></SongItem> */}
+                                        <SongItem img={value.coverImgUrl} title={value.name} num={value.playCount} height={170}></SongItem>
+                                    </div>
+                                )
+                            })
+                        }                    
+                    </div>
+                </SongSheetContainer>
+
         )
     }
 

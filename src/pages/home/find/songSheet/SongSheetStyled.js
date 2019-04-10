@@ -1,7 +1,23 @@
 import Styled from 'styled-components'
 import border from 'components/styled/border'
 
+
 const SongSheetContainer = Styled.div`
+    height:.2rem
+    background-color:pink
+
+    .am-tabs-content-wrap{
+        background-color:yellow
+        padding-top: 0.88rem !important
+      }
+      .am-tab-bar-item{
+
+      }
+    
+    .songListContainer {
+       width:100%
+       height:${document.documentElement.clientHeight-100}px
+    }
     .titleImg {
         width:100%
         height:1.45rem

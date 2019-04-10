@@ -2,11 +2,21 @@ import Styled from 'styled-components'
 import border from 'components/styled/border'
 
 const FindContainer = Styled.div `
+
     height: 2.16rem
     width:100%
 
+    .header{
+      position:fixed
+      top:.5rem
+      width:100%
+      height: .5rem
+    }
+
+    .swiper{
+    }
+
     .swiper-left{
-      overflow:scroll
       margin-top:-1px
 
       .swiperBg{

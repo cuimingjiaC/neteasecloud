@@ -35,9 +35,9 @@ export default class findTabs extends React.Component {
               <TabBar
                 unselectedTintColor="#999"
                 tintColor="#d33a31"
-                barTintColor="white"
+                barTintColor="white"             
                 hidden={this.state.hidden}
-              >
+              >          
                 <TabBar.Item
                   title="发现"
                   key="find"
@@ -178,7 +178,7 @@ export default class findTabs extends React.Component {
                 >
                   <Account></Account>
                 </TabBar.Item>
-                
+               
               </TabBar>
             </div>
           );

@@ -20,7 +20,8 @@ class FindPage extends Component {
         return (
             <FindContainer> 
                 <Search onClick={this.handleClickSearch} icon1="icon-icon_im_voice" icon2="icon-icon_index_line" type="find" returnUrl={this.props.location.pathname}></Search>
-                <FindHeader onSwitch={this.handleSwitch}></FindHeader>
+                <div className="header"><FindHeader onSwitch={this.handleSwitch}></FindHeader></div>
+                
                 <div className="swiper">
                     <Route path='/find/left' render={() => <FindLeft />}/>
                     <Route path='/find/right' render={() => <FindRight />}/>

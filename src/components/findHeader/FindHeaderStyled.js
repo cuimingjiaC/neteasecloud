@@ -4,6 +4,8 @@ const FindHeaderContainer = Styled.div `
     width:100%
     height: .5rem
     background-color:#db4137
+    position:fixed
+    top:0
     div {
         display: flex
         span {
