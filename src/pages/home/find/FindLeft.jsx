@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Swiper from 'components/swiper/view/Swiper'
-import { FindContainer, BorderedClassify, RecommendSongs} from './findStyled'
+import {BorderedClassify, RecommendSongs} from './findStyled'
 import ClassifyIcon from 'components/classifyIcon/ClassifyIcon'
 import SongItem from 'components/songItem/SongItem'
 import { connect } from 'react-redux'

@@ -2,9 +2,6 @@ import React, { Component } from 'react'
 import {ClassifyIconContaniner} from './ClassifyIconStyled'
 
 class ClassifyIcon extends Component {
-    constructor(props) {
-        super(props)
-    }
     render(){
         return (
             <ClassifyIconContaniner>

@@ -11,6 +11,19 @@ import {
   export default (state=defaultState, action) => {
     switch(action.type) {
       case GET_LIST:
+      // var a = {
+      //   ...state,
+      //   list: action.list
+      // }
+      // var b = state
+      // var c = {...state}
+      // var d = {...state,a:1}
+      // var e = {...state,list:1}
+      // console.log(b)
+      // console.log(c)
+      // console.log(d)
+      // console.log(e)
+      // console.log(1,a)
         return {
           ...state,
           list: action.list

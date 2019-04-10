@@ -1,51 +1,69 @@
 import React, { Component } from 'react'
 
 import { SongSheetContainer, BorderTitle, BorderedSpan, Span} from './SongSheetStyled'
-import Search from 'components/search/Search'
 import FindHeader from 'components/findHeader/FindHeader'
 import SongItem from 'components/songItem/SongItem'
 import { connect } from 'react-redux'
 import { getListAsync } from 'components/swiper/actionCreator'
+import { getSongListAsync} from 'reducer/songList/actionCreator'
 
 const mapState = state => ({
     list: state.list.list,
-    showTitleName:'全部歌单'
+    songList: state.songList.songList.slice(0,3),
+    
   })
 
-  const mapDispatch = dispatch => {
-    return {
-      loadData() {
+const mapDispatch = dispatch => ({
+    loadData() {
         dispatch(getListAsync())
-      }
+    },
+    loadSongList() {
+        dispatch(getSongListAsync())
     }
-  }
+})
 
   
 class SongSheet extends Component {
     constructor(props) {
         super(props)
-        console.log(props)
+        this.state = {
+            showTitleName:'全部歌单'
+        };
+        this.props.loadSongList()
+        // console.log(1,props)
+        this.clickSongList = this.clickSongList.bind(this)
     }
 
     componentDidMount(){
+        // console.log(2,this.props)
         if (this.props.list.length === 0) {
             this.props.loadData()
-          }
+        }
     }
 
     render () {
+        // console.log(3,this.props) // 问题：这里当props里的state变化时候为什么执行两次？？？
         return (
             <SongSheetContainer> 
                 <FindHeader icon1="icon-previous_step" icon2="icon-icon_index_line"></FindHeader>
                {/* <Search onClick={this.handleClickSearch} ></Search> */}
                <div className="titleImg"></div>
                <div className="classify">
-                    <BorderTitle className="title"><span className="titleName">{this.props.showTitleName}</span><span className="iconfont  icon-right"></span></BorderTitle>
+                    <BorderTitle className="title"><span className="titleName">{this.state.showTitleName}</span><span className="iconfont  icon-right"></span></BorderTitle>
                     <div className="classItems">
-                        <ul>
-                            <li><BorderedSpan>摇滚</BorderedSpan></li>
+                        <ul>    
+                            {
+                                this.props.songList.map((value,index) =>  {
+                                    return (
+                                        index !== this.props.songList.length - 1 
+                                            ? <li key={index} onClick={()=>{this.clickSongList(value)}}><BorderedSpan>{value.name}</BorderedSpan></li>
+                                            : <li key={index} onClick={()=>{this.clickSongList(value)}}><Span>{value.name}</Span></li>
+                                 )})
+                            }
+
+                            {/* <li><BorderedSpan>摇滚</BorderedSpan></li>
                             <li><BorderedSpan>华语</BorderedSpan></li>
-                            <li><Span>民谣</Span></li>
+                            <li><Span>民谣</Span></li> */}
                         </ul>
                     </div>
                </div>
@@ -70,11 +88,16 @@ class SongSheet extends Component {
                     }                    
                 </div>
 
-              
-
             </SongSheetContainer>
         )
     }
+
+    clickSongList(value){
+        this.setState({
+            showTitleName: value.name,
+        });
+    }
+
 }
 
 export default connect(mapState, mapDispatch)(SongSheet)

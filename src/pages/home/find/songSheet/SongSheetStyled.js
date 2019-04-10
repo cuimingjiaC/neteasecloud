@@ -47,12 +47,6 @@ const SongSheetContainer = Styled.div`
 
 `
 
-const Title = Styled.span `
-    border-radius: .15rem
-    padding: .1rem 
-    color:#323233
-`
-
 const Span = Styled.span `
     padding: 0 .1rem
     color: #646566

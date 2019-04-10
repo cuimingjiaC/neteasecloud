@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { FindContainer, BorderedClassify} from './findStyled'
+import { FindContainer} from './findStyled'
 
 import Search from 'components/search/Search'
 import FindHeader from './FindHeader'

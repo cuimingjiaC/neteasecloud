@@ -3,7 +3,6 @@ import React, { Component } from 'react'
 import SearchPage from '../search/SearchPage'
 import Play from '../play/Play'
 import FindPage from './FindPage'
-import FindHeader from './FindHeader'
 import SongSheet from './songSheet/SongSheet'
 
 import {
