@@ -4,10 +4,9 @@ import border from 'components/styled/border'
 
 const SongSheetContainer = Styled.div`
     height:.2rem
-    background-color:pink
 
     .am-tabs-content-wrap{
-        background-color:yellow
+        background-color:#eeeff0
         padding-top: 0.88rem !important
       }
       .am-tab-bar-item{
@@ -106,25 +105,36 @@ const slide_out = keyframes`
 
 const AllSongList = Styled.div `
     display: ${ props => props.display } 
+
+    
     
     .showInDown {
-        background: yellow;
-        padding-top:60px
+        background: #eeeff0;
+       
         width: 100%
         z-index:999
         height: ${document.documentElement.clientHeight}px;
         position: fixed;
         animation: ${slide_in} 300ms ease-in forwards 
+
+        padding-top:60px
+        overflow:hidden
     }
 
     .leaveOutDown {
-        background: yellow;
+        background: #eeeff0;
         padding-top:60px
         width: 100%
         z-index:999
         height: ${document.documentElement.clientHeight}px;
         position: fixed;
         animation: ${slide_out} 300ms ease-in forwards 
+    }
+
+    .scrollContainer{
+        height:100%
+        overflow:scroll
+        margin-top:-.1rem
     }
 
     .testbox{
@@ -136,12 +146,96 @@ const AllSongList = Styled.div `
             width:100px;
             height:100px
             margin:10px
-            background-color:pink
         }
     }
-   
+
+    .allTitle {
+        width:100%
+        height: .6rem
+        line-height:.6rem
+        background-color:#fbfcfd
+        position:relative
+    }
+    
+    .songscClassifyContainer {
+        .songsListItem {
+            margin-top:.1rem
+            background-color: #fbfcfd
+            overflow:hidden
+            .itemTitle {
+                margin-top: -1px;
+                margin-left: -1px;
+                box-sizing:border-box;
+
+                width:25%
+                height:.94rem
+                border:1px solid #e5e5e5
+                float:left
+                text-align:center
+                display:flex
+                flex-direction:column
+                justify-content:center
+            }
+            .item{
+                margin-top: -1px;
+                margin-left: -1px;
+                box-sizing:border-box;
+                
+                width:25%
+                height: .47rem
+                border:1px solid #e5e5e5
+                float:left
+                text-align:center
+                display:flex
+                justify-content:center
+                align-items:center
+                overflow:hidden
+                position:relative
+                .hot{
+                    width:60%
+                    height:28%
+                    background-color:#d33a31
+                    font-size:10px
+                    text-align:center
+                    color:#fff
+                    position:absolute
+                    left:-14px
+                    top:7px
+                    transform:rotate(-45deg)
+                }
+                .hotfalse{
+                    visibility:hidden
+                }
+                .hottrue{
+                    visibility:visible
+                }
+            }
+        }
+
+    }
 
 `
+
+const titleBox = Styled.div`
+    height: .47rem
+    line-height: .47rem
+    width:96%
+    position:absolute !important
+    top:0
+    bottom:0
+    left:0
+    right:0
+    margin:auto
+    text-align:center
+    font-size:.16rem
+    color:#333334
+`
+const BorderedTitleBox = border({
+    component: titleBox,
+    color: '#e5e5e5',
+    width: '1px'
+})
+
 
 
 
@@ -150,5 +244,6 @@ export {
     BorderTitle,
     BorderedSpan,
     Span,
-    AllSongList
+    AllSongList,
+    BorderedTitleBox
 }

@@ -5,13 +5,15 @@ import {
     BorderTitle, 
     BorderedSpan, 
     Span,
-    AllSongList
+    AllSongList,
+    BorderedTitleBox
 } from './SongSheetStyled'
 import FindHeader from 'components/findHeader/FindHeader'
 import SongItem from 'components/songItem/SongItem'
 import { connect } from 'react-redux'
 import { getListAsync } from 'components/swiper/actionCreator'
 import { getSongListAsync} from 'reducer/songList/actionCreator'
+import http from 'utils/fetch'
 
 const mapState = state => ({
     list: state.list.list,
@@ -34,12 +36,14 @@ class SongSheet extends Component {
         this.state = {
             showTitleName:'全部歌单',
             display:'none',
-            headSwitch: 'one'
+            headSwitch: 'one',
+            catList:[]
         };
         this.props.loadSongList()
         this.clickSongList = this.clickSongList.bind(this)
         this.changeAllSongList = this.changeAllSongList.bind(this)
         this.goBack = this.goBack.bind(this)
+        this.getCatlist()
     }
 
     componentDidMount(){
@@ -99,23 +103,46 @@ class SongSheet extends Component {
 
             <AllSongList display={this.state.display}>
                 <div className={this.state.allSongListShow ?  'showInDown': 'leaveOutDown'}>
-                    
                     {
                         this.state.headSwitch === 'two'  
                         ?   <FindHeader icon1="icon-down" title="筛选歌单" firstIconType="down" onFirstIconClick={()=>{this.changeAllSongList(false)}}></FindHeader>
                         :   <FindHeader icon1="icon-previous_step" title="歌单" icon2="icon-icon_index_line" onFirstIconClick={()=>{this.goBack()}}></FindHeader>
                     }
+                    <div class="scrollContainer">
 
-                    <button onClick={()=>{this.changeAllSongList(false)}}>取消</button>
-                    <div className="testbox">
-                        <div className="test">1</div>
-                        <div className="test">2</div>
-                        <div className="test">3</div>
-                        <div className="test">4</div>
-                        <div className="test">5</div>
-                        <div className="test">6</div>
-                        <div className="test">7</div>
+                        <div className="allTitle">
+                            <BorderedTitleBox className="titleBox">
+                                <span>全部歌单</span>
+                            </BorderedTitleBox>
+                        </div>
+
+                        <div className="songscClassifyContainer">
+                            {
+                                this.state.catList.map((value)=>{
+                                    return (
+                                        <div className="songsListItem" key={value.key}>
+                                            <div className="itemTitle">
+                                                <p className='iconfont icon-icon_index_line'> </p>
+                                                <p>{value.value}</p>
+                                            </div>
+                                            {
+                                                value.sub.map((subValue,index) => {
+                                                    return (
+                                                        <div className="item" key={index}>
+                                                            <span>{subValue.name}</span>
+                                                            <span className={`hot  hot${subValue.hot.toString()}`}>HOT</span>
+                                                        </div>
+                                                    )
+                                                })
+                                            }
+                                            
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
                     </div>
+                    
                 </div>
             </AllSongList>
         </div>
@@ -131,7 +158,6 @@ class SongSheet extends Component {
             display:'true',
             headSwitch: tag === true ? 'two'  : 'one'
         })
-        console.log(this.state)
     } 
 
     clickSongList(value){
@@ -139,6 +165,31 @@ class SongSheet extends Component {
             showTitleName: value.name,
         });
         this.props.loadData(value.name)
+    }
+
+    async getCatlist() {
+        let result = await http.get('/api/playlist/catlist')
+        var categories = []
+        for (var key in result.categories){
+            var obj = {
+                'key': key,
+                'value': result.categories[key],
+                'sub':[]
+            }
+            categories.push(obj)
+        }
+       
+        categories.map(value=>{
+            result.sub.map(v => {
+                if(value.key == v.category){
+                    value.sub.push(v)
+                }
+            })
+        })
+        this.setState({
+            catList:categories
+        })
+        console.log(categories)
     }
 
 }
