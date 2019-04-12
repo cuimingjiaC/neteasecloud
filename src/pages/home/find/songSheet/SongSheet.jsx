@@ -37,7 +37,8 @@ class SongSheet extends Component {
             showTitleName:'全部歌单',
             display:'none',
             headSwitch: 'one',
-            catList:[]
+            catList:[],
+            isChoosed: null
         };
         this.props.loadSongList()
         this.clickSongList = this.clickSongList.bind(this)
@@ -53,20 +54,20 @@ class SongSheet extends Component {
     }
 
     render () {
-        // console.log(3,this.props) // 问题：这里当props里的state变化时候为什么执行两次？？？
+        // console.log(3,this.props) // 问题：这里当props里的state变化时候为什么执行两次？？？答：返回数据执行一次，回来的数据又修改又·执行一次
         return (
         <div>
             <SongSheetContainer> 
                 {
                     this.state.headSwitch === 'one'  
                     ? <FindHeader icon1="icon-previous_step" title="歌单" icon2="icon-icon_index_line" onFirstIconClick={()=>{this.goBack()}}></FindHeader>
-                    :  <FindHeader icon1="icon-down" title="筛选歌单" firstIconType="down" onFirstIconClick={()=>{this.changeAllSongList(false)}}></FindHeader>
+                    :  <FindHeader icon1="icon-down" title="筛选歌单" firstIconType="down" onFirstIconClick={()=>{this.changeAllSongList(false,this.state.showTitleName)}}></FindHeader>
                 }
                     
                
                 <div className="titleImg"></div>
                 <div className="classify">
-                        <BorderTitle className="title" onClick={()=>{this.changeAllSongList(true)}}><span className="titleName">{this.state.showTitleName}</span><span className="iconfont  icon-right"></span></BorderTitle>
+                        <BorderTitle className="title" onClick={()=>{this.changeAllSongList(true,this.state.showTitleName)}}><span className="titleName">{this.state.showTitleName}</span><span className="iconfont  icon-right"></span></BorderTitle>
                         <div className="classItems">
                             <ul>    
                                 {
@@ -105,14 +106,17 @@ class SongSheet extends Component {
                 <div className={this.state.allSongListShow ?  'showInDown': 'leaveOutDown'}>
                     {
                         this.state.headSwitch === 'two'  
-                        ?   <FindHeader icon1="icon-down" title="筛选歌单" firstIconType="down" onFirstIconClick={()=>{this.changeAllSongList(false)}}></FindHeader>
+                        ?   <FindHeader icon1="icon-down" title="筛选歌单" firstIconType="down" onFirstIconClick={()=>{this.changeAllSongList(false,this.state.showTitleName)}}></FindHeader>
                         :   <FindHeader icon1="icon-previous_step" title="歌单" icon2="icon-icon_index_line" onFirstIconClick={()=>{this.goBack()}}></FindHeader>
                     }
-                    <div class="scrollContainer">
+                    <div className="scrollContainer">
 
                         <div className="allTitle">
-                            <BorderedTitleBox className="titleBox">
+                            <BorderedTitleBox className={`titleBox  choose${this.state.isChoosed==='全部歌单'}`}  isChoosed={this.state.className==='全部歌单'} onClick={()=>{this.chickItem('全部歌单')}}>
                                 <span>全部歌单</span>
+                                <span className={`duigouTitle${this.state.isChoosed==='全部歌单'}`}>
+                                    <div className={`iconfont icon-duigoux duigouTitleIcon${this.state.isChoosed==='全部歌单'}`}></div>
+                                </span>
                             </BorderedTitleBox>
                         </div>
 
@@ -122,15 +126,21 @@ class SongSheet extends Component {
                                     return (
                                         <div className="songsListItem" key={value.key}>
                                             <div className="itemTitle">
-                                                <p className='iconfont icon-icon_index_line'> </p>
+                                                <p className='iconfont icon-icon_index_line'></p>
                                                 <p>{value.value}</p>
                                             </div>
                                             {
-                                                value.sub.map((subValue,index) => {
+                                                value.sub.map((subValue,index) => { 
                                                     return (
-                                                        <div className="item" key={index}>
+                                                        <div className={`item choose${this.state.isChoosed===subValue.name}`}  key={index} onClick={()=>{this.chickItem(subValue.name)}}>
                                                             <span>{subValue.name}</span>
                                                             <span className={`hot  hot${subValue.hot.toString()}`}>HOT</span>
+                                                            
+                                                                <span className={`duigou${this.state.isChoosed===subValue.name}`}>
+                                                                    <span className={`iconfont icon-duigoux duigouIcon${this.state.isChoosed===subValue.name}`}></span>
+                                                                </span>
+                                                            
+                                                           
                                                         </div>
                                                     )
                                                 })
@@ -142,7 +152,7 @@ class SongSheet extends Component {
                             }
                         </div>
                     </div>
-                    
+                    {/* className={`item` choose${this.state.className===''} `} */}
                 </div>
             </AllSongList>
         </div>
@@ -152,11 +162,16 @@ class SongSheet extends Component {
     goBack() {
         window.history.back()
     }
-    changeAllSongList(tag) {
+    chickItem(subName){
+        this.changeAllSongList(false,subName)
+    }
+    changeAllSongList(tag,name) {
         this.setState({
             allSongListShow: tag,
             display:'true',
-            headSwitch: tag === true ? 'two'  : 'one'
+            headSwitch: tag === true ? 'two'  : 'one',
+            isChoosed:name,
+            showTitleName:name
         })
     } 
 
@@ -181,7 +196,7 @@ class SongSheet extends Component {
        
         categories.map(value=>{
             result.sub.map(v => {
-                if(value.key == v.category){
+                if(value.key === v.category){
                     value.sub.push(v)
                 }
             })
@@ -189,7 +204,7 @@ class SongSheet extends Component {
         this.setState({
             catList:categories
         })
-        console.log(categories)
+        // console.log(categories)
     }
 
 }

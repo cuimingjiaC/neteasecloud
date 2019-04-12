@@ -106,8 +106,58 @@ const slide_out = keyframes`
 const AllSongList = Styled.div `
     display: ${ props => props.display } 
 
-    
-    
+    .choosetrue{
+        border:1px solid #d33a31 !important
+    }
+
+    .duigouTitleIcontrue{
+        position: relative;
+        bottom: 4px;
+        right: 8px;
+        transform: rotate(-45deg);
+        color:#fff
+    }
+    .duigouTitletrue{
+        position: absolute;
+        bottom: -.1rem;
+        right: .02rem;
+        color: #ed0e0e;
+
+
+        width: 30px;
+        background-color: #d33a31;
+        transform: rotate(45deg);
+        transform-origin: 20% 100%;
+        
+    }
+    .duigouTitlefalse{
+        display:none
+    }
+
+    .duigouIcontrue{
+        position: relative;
+        bottom: 4px;
+        right: 8px;
+        transform: rotate(-45deg);
+        color:#fff
+    }
+    .duigoutrue{
+        position:absolute
+        bottom:-.04rem
+        right:-0.04rem
+        color:#ed0e0e
+
+        width: 30px;
+        background-color: #d33a31;
+        transform: rotate(45deg);
+        transform-origin: 20% 100%;
+
+        height: 35px
+    }
+    .duigoufalse{
+        display:none
+    }
+
     .showInDown {
         background: #eeeff0;
        
@@ -180,7 +230,7 @@ const AllSongList = Styled.div `
                 margin-top: -1px;
                 margin-left: -1px;
                 box-sizing:border-box;
-                
+
                 width:25%
                 height: .47rem
                 border:1px solid #e5e5e5
@@ -211,7 +261,6 @@ const AllSongList = Styled.div `
                 }
             }
         }
-
     }
 
 `
@@ -229,6 +278,7 @@ const titleBox = Styled.div`
     text-align:center
     font-size:.16rem
     color:#333334
+    overflow:hidden
 `
 const BorderedTitleBox = border({
     component: titleBox,
